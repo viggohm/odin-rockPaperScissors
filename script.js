@@ -14,49 +14,73 @@ let getPlayerChoice = function () {
   return playerChoice.toLocaleLowerCase();
 };
 
-let playerSelection = getPlayerChoice();
-let computerSelection = getComputerChoice();
+let playRound = function (score) {
+  let playerSelection = getPlayerChoice();
+  let computerSelection = getComputerChoice();
 
-console.log(computerSelection);
-console.log(playerSelection);
+  console.log(computerSelection);
+  console.log(playerSelection);
 
-switch (playerSelection) {
-  case "rock":
-    switch (computerSelection) {
-      case "rock":
-        console.log("You draw!");
-        break;
-      case "paper":
-        console.log("You lose! Paper beats Rock!");
-        break;
-      case "scissors":
-        console.log("You win! Rock beats Scissors!");
-        break;
-    }
-    break;
-  case "paper":
-    switch (computerSelection) {
-      case "rock":
-        console.log("You win! Paper beats Rock!");
-        break;
-      case "paper":
-        console.log("You draw!");
-        break;
-      case "scissors":
-        console.log("You lose! Scissors beats Paper!");
-    }
-    break;
-  case "scissors":
-    switch (computerSelection) {
-      case "rock":
-        console.log("You lose! Rock beats Scissors!");
-        break;
-      case "paper":
-        console.log("You win! Scissors beats Paper!");
-        break;
-      case "scissors":
-        console.log("You draw!");
-        break;
-    }
-    break;
-}
+  switch (playerSelection) {
+    case "rock":
+      switch (computerSelection) {
+        case "rock":
+          console.log("You draw!");
+          break;
+        case "paper":
+          console.log("You lose! Paper beats Rock!");
+          score--;
+          break;
+        case "scissors":
+          console.log("You win! Rock beats Scissors!");
+          score++;
+          break;
+      }
+      break;
+    case "paper":
+      switch (computerSelection) {
+        case "rock":
+          console.log("You win! Paper beats Rock!");
+          score++;
+          break;
+        case "paper":
+          console.log("You draw!");
+          break;
+        case "scissors":
+          console.log("You lose! Scissors beats Paper!");
+          score--;
+      }
+      break;
+    case "scissors":
+      switch (computerSelection) {
+        case "rock":
+          console.log("You lose! Rock beats Scissors!");
+          score--;
+          break;
+        case "paper":
+          console.log("You win! Scissors beats Paper!");
+          score++;
+          break;
+        case "scissors":
+          console.log("You draw!");
+          break;
+      }
+      break;
+  }
+  return score;
+};
+
+let playGame = function () {
+  let score = 0;
+  for (let i = 0; i < 5; i++) {
+    score = playRound(score);
+  }
+  if (score > 0) {
+    alert("You won! Congratulations!");
+  } else if (score < 0) {
+    alert("You lost! Better luck next time");
+    alert("You tied after 5 games! You better have another go!");
+  }
+};
+
+playGame();
