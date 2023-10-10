@@ -67,6 +67,7 @@ let playRound = function (score) {
       }
       break;
   }
+  console.log(score);
   return score;
 };
 
@@ -81,6 +82,8 @@ let playGame = function () {
     alert("You lost! Better luck next time");
     alert("You tied after 5 games! You better have another go!");
   }
+  alert("Feel free to try again!");
+  playGame();
 };
 
 playGame();
